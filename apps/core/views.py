@@ -27,17 +27,17 @@ def index(request):
         'events': events,
         'has_current_events': has_current_events,
     }    
-    return render(request, 'index.html', context)
+    return render(request, 'core/index.html', context)
 
 
 def imprint(request):
     """View function for imprint"""
-    return render(request, 'event/imprint.html')    
+    return render(request, 'core/imprint.html')    
 
 
 def privacy_policy(request):
     """View function for privacy policy"""
-    return render(request, 'event/privacy_policy.html')
+    return render(request, 'core/privacy_policy.html')
 
 
 def contact(request):
@@ -48,7 +48,7 @@ def contact(request):
         context = {
                 'events': events,
         }
-        return render(request, 'event/contact.html', context)        
+        return render(request, 'core/contact.html', context)        
 
     if request.method == 'POST':          
         form = ContactForm(request.POST)
@@ -115,14 +115,14 @@ def contact(request):
                         'events': events,
                         'response': 'header_error',
                     }
-                    return render(request, 'event/contact.html', context)
+                    return render(request, 'core/contact.html', context)
 
                 # alles erfolgreich
                 context = {
                     'events': events,
                     'response': 'success',
                 }
-                return render(request, 'event/contact.html', context)
+                return render(request, 'core/contact.html', context)
 
             # wenn Captcha Fehler
             else:
@@ -130,7 +130,7 @@ def contact(request):
                     'events': events,
                     'response': 'captcha_error',
                 }
-                return render(request, 'event/contact.html', context)
+                return render(request, 'core/contact.html', context)
 
         # wenn Formular ungültig
         else:
@@ -138,4 +138,4 @@ def contact(request):
                 'events': events,
                 'response': 'form_error',
             }
-            return render(request, 'event/contact.html', context)
+            return render(request, 'core/contact.html', context)

@@ -38,7 +38,7 @@ class Event(models.Model):
 
 class Image(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, null=True)
-    image = models.ImageField('Bild', null=True, blank=True, upload_to='images/')
+    image = models.ImageField('Bild', null=True, blank=True, upload_to='images/events/')
 
     class Meta:
         verbose_name = 'Bild'

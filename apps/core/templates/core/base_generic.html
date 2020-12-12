@@ -45,8 +45,8 @@
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="custom-brand {% url 'event:index' as the_url %} {% if request.path == the_url %}underline{% endif %}"
-                href="{% url 'event:index' %}">
+            <a class="custom-brand {% url 'core:index' as the_url %} {% if request.path == the_url %}underline{% endif %}"
+                href="{% url 'core:index' %}">
                 RW11
             </a>
 
@@ -58,20 +58,20 @@
             <div class="collapse navbar-collapse" id="headerNavbar">
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-light {% url 'event:events' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                            href="{% url 'event:events' %}">Spielplan</a>
+                        <a class="nav-link text-light {% url 'events' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'events' %}">Spielplan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light {% url 'event:archive' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                            href="{% url 'event:archive' %}">Archiv</a>
+                        <a class="nav-link text-light {% url 'archive' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'archive' %}">Archiv</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light {% url 'event:contact' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                            href="{% url 'event:contact' %}">Reservierung</a>
+                        <a class="nav-link text-light {% url 'core:contact' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'core:contact' %}">Reservierung</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light {% url 'event:team' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                            href="{% url 'event:team' %}">Team</a>
+                        <a class="nav-link text-light {% url 'team' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'team' %}">Team</a>
                     </li>
                 </ul>
             </div>
@@ -85,7 +85,7 @@
 
     {% block footer %}
     <footer class="footer mt-auto">
-        {% url 'event:index' as the_url %}
+        {% url 'core:index' as the_url %}
         {% if request.path == the_url %}
         <div class="container">
             <div class="row">
@@ -120,14 +120,14 @@
                     <div class="col-6 col-md-auto">
                         <div class="row">
                             <div class="col-auto ml-auto">
-                                <a class="text-light {% url 'event:privacy_policy' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                                    href="{% url 'event:privacy_policy' %}">
+                                <a class="text-light {% url 'core:privacy_policy' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                                    href="{% url 'core:privacy_policy' %}">
                                     Datenschutz
                                 </a>
                             </div>
                             <div class="col-auto ml-auto">
-                                <a class="text-light {% url 'event:imprint' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
-                                    href="{% url 'event:imprint' %}">
+                                <a class="text-light {% url 'core:imprint' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                                    href="{% url 'core:imprint' %}">
                                     Impressum
                                 </a>
                             </div>

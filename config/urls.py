@@ -14,8 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from apps.event import views as eventviews
+from apps.team import views as teamviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # core
+    path('', include('apps.core.urls', namespace='core')),
+
+    # event
+    path('spielplan/', eventviews.events, name='events'),
+    path('veranstaltung/<int:event_id>', eventviews.event, name='event_detail'),
+    path('archiv/', eventviews.archive, name='archive'),
+
+    # team
+    path('team/', teamviews.team, name='team'),
 ]
+
+admin.site.site_header = "RW11"
