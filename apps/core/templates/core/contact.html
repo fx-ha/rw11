@@ -1,0 +1,165 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+<title>RW11 | Reservierung</title>
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'event/css/cookies-eu-banner.default.css' %}">
+
+<div class="container">
+
+    <div class="row mb-3 mb-lg-4">
+        <div class="col">
+            <h1>Reservierung</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {% if response == 'success' %}
+            <div class="alert alert-success mb-3" role="alert">
+                Vielen Dank, die Anfrage wird bearbeitet!
+            </div>
+            {% else %}
+            {% if response == 'header_error' %}
+            <div class="alert alert-danger mb-3" role="alert">
+                Fehler beim Versand! Bitte dem Administrator Bescheid geben.
+            </div>
+            {% endif %}
+            {% if response == 'form_error' %}
+            <div class="alert alert-danger mb-3" role="alert">
+                Fehler im Kontaktformular. Wurden alle Felder korrekt ausgefüllt?
+            </div>
+            {% endif %}
+            {% if response == 'captcha_error' %}
+            <div class="alert alert-danger mb-3" role="alert">
+                Captcha-Überprüfung fehlgeschlagen. Bitte kontaktiere rw11@uni-bayreuth.de
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div id="cookies-eu-banner" class="mb-3" style="display: none;">
+                Recaptcha und Google Maps benötigen Cookies.
+                <a href="{% url 'event:privacy_policy' %}" id="cookies-eu-more">Mehr dazu</a>
+                <button id="cookies-eu-reject">Ablehnen</button>
+                <button id="cookies-eu-accept">Zustimmen</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12 col-lg-5">
+            <form action="{% url 'event:contact' %}" method="post" class="row d-none" id="form">
+                {% csrf_token %}
+
+                {% if events %}
+                <div class="col-12 col-lg-11 mb-3">
+                    <div class="form-floating">
+                        <select id="event" class="form-select" name="message_event">
+                            <option value="">Auswählen...</option>
+                            {% for event in events %}
+                            <option value="{{ event.title }}">{{ event.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="event">Veranstaltung</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-11 mb-3">
+                    <div class="form-floating">
+                        <select id="persons" class="form-select" name="message_persons">
+                            <option value="">Auswählen...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <label for="persons">Personen</label>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="col-12 col-lg-11 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" name="message_name"
+                            placeholder="Max Musterfrau" required>
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-11 mb-3">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" name="message_email"
+                            placeholder="name@beispiel.de" required>
+                        <label for="email">E-Mail</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-11 mb-3">
+                    <div class="form-floating">
+                        <textarea class="form-control" id="note" name="message_note"
+                            placeholder="Bitte hinterlasse uns eine Nachricht" required></textarea>
+                        <label for="note">Nachricht</label>
+                        {% if events %}
+                        <div id="noteHelp" class="form-text">Bitte teile uns mit, für welchen Tag reserviert werden
+                            soll.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-11 mt-2 mb-3 mb-lg-5">
+                    <button type="submit" class="btn btn-outline-primary g-recaptcha"
+                        data-sitekey="6Ld8FuQZAAAAAK8MB5G7Cg0cpCEjH8Cmf8beOCcb" data-callback='onSubmit'
+                        data-action='submit'>Senden</button>
+                </div>
+            </form>
+        </div>
+
+        {% endif %}
+        <div class="col-lg-7 col-12 mt-4 mt-lg-0">
+            <div id="map"></div>
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'event/js/cookies-eu-banner.min.js' %}"></script>
+<script>
+    new CookiesEuBanner(function () {
+        const head = document.getElementsByTagName('head')[0];
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.type = 'text/javascript';
+        head.appendChild(script)
+
+        const form = document.getElementById('form')
+        if (form !== null) {
+            form.classList.remove("d-none")
+        }
+
+        document.getElementById('map').innerHTML =
+            '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2567.639559055194!2d11.577080215703512!3d49.943104179408586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a1a2d03c5e72bb%3A0x41183551746e9dfc!2sRichard-Wagner-Stra%C3%9Fe%2011%2C%2095444%20Bayreuth!5e0!3m2!1sde!2sde!4v1603882424059!5m2!1sde!2sde" width="300" height="200" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" title="Google Map Richard-Wagner-Strasse 11 Bayreuth"></iframe>'
+    }, true)
+
+    function onSubmit(token) {
+        form = document.getElementById("form")
+        form.reportValidity()
+        if (form.checkValidity()) {
+            form.submit()
+        }
+    }
+</script>
+{% endblock content %}

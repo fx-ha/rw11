@@ -1,0 +1,46 @@
+{% extends 'base_generic.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="d-none">RW11</h1>
+        </div>
+    </div>
+
+    <!-- Header Image -->
+    <div class="row frontpage-img">
+        <div class="col">
+            <img src="{% static 'images/Kafkaskaefer3_Neumann-Perez_Luis.jpg' %}" class="d-block w-100"
+                 alt="Header-Bild" width="1200" height="400">
+        </div>
+    </div>
+</div>
+
+<!-- Spielplan Vorschau -->
+<section>
+    <div class="container mt-3 mt-lg-4">
+        <div class="row">
+            <div class="col">
+                {% if events %}
+                {% for event in events %}
+                <p>
+                    <a href="{% url 'event:event_detail' event.id %}">
+                        <strong>{{ event.title }}</strong>
+                    </a>
+                    {{ event.startdate }}
+                </p>
+                {% endfor %}
+                {% if has_current_events %}
+                <a href="{% url 'event:events' %}" class="btn btn-outline-primary">Zum Spielplan</a>
+                {% else %}
+                <a href="{% url 'event:archive' %}" class="btn btn-outline-primary">Zum Archiv</a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+</section>
+
+{% endblock content %}

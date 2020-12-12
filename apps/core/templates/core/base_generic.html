@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="de">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="RW11​ ist ein Raum für Theater, Performance und Bildende Kunst in der Bayreuther Innenstadt">
+    <meta name="keywords" content="Theater, Bayreuth, Universität, Performance Art, Kunst">
+    <meta name="author" content="RW11">
+
+    <!-- Title -->
+    {% block title %}
+    <title>RW11</title>
+    {% endblock title %}
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'event/css/main.css' %}">
+
+    <!-- Icon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/icons/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/icons/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/icons/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/icons/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/icons/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/icons/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/icons/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/icons/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/icons/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/icons/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/icons/manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#f5e9c1">
+    <meta name="msapplication-TileImage" content="{% static 'images/icons/ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#f5e9c1">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="custom-brand {% url 'event:index' as the_url %} {% if request.path == the_url %}underline{% endif %}"
+                href="{% url 'event:index' %}">
+                RW11
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavbar"
+                aria-controls="headerNavbar" aria-expanded="false" aria-label="Navigation ein- oder ausblenden">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="headerNavbar">
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-light {% url 'event:events' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'event:events' %}">Spielplan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light {% url 'event:archive' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'event:archive' %}">Archiv</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light {% url 'event:contact' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'event:contact' %}">Reservierung</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light {% url 'event:team' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                            href="{% url 'event:team' %}">Team</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="mt-3 mt-lg-4 mb-3">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    {% block footer %}
+    <footer class="footer mt-auto">
+        {% url 'event:index' as the_url %}
+        {% if request.path == the_url %}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <hr>
+                    <p class="mt-lg-3">
+                        RW 11 wird ermöglicht durch die freundliche Unterstützung des Studentenwerks Oberfranken, der
+                        Sparkasse Bayreuth, der Wirtschaftsförderung Bayreuth, dem Kulturamt Bayreuth, der Oberfranken
+                        Stiftung, der Theaterwissenschaft der Universität Bayreuth und dem Iwalewahaus.
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <nav class="bg-dark">
+            <div class="container py-3">
+                <div class="row text-light">
+                    <div class="col-6 col-md-auto mr-md-auto pt-1 pt-md-0">
+                        <a class="mr-2" href="mailto:rw11@uni-bayreuth.de" title="Email: rw11@uni-bayreuth.de"
+                            target="_blank" rel="noopener">
+                            <img src="{% static 'images/iconmonstr-email-12.svg' %}" alt="Email: rw11@uni-bayreuth.de">
+                        </a>
+                        <a class="mr-2" href="https://facebook.com/RW11Festival" title="RW11 auf Facebook"
+                            target="_blank" rel="noopener">
+                            <img src="{% static 'images/iconmonstr-facebook-3.svg' %}" alt="RW11 auf Facebook">
+                        </a>
+                        <a href="https://instagram.com/r_w_1_1" title="RW11 auf Instagram" target="_blank"
+                            rel="noopener">
+                            <img src="{% static 'images/iconmonstr-instagram-1.svg' %}" alt="RW11 auf Instagram">
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-auto">
+                        <div class="row">
+                            <div class="col-auto ml-auto">
+                                <a class="text-light {% url 'event:privacy_policy' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                                    href="{% url 'event:privacy_policy' %}">
+                                    Datenschutz
+                                </a>
+                            </div>
+                            <div class="col-auto ml-auto">
+                                <a class="text-light {% url 'event:imprint' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
+                                    href="{% url 'event:imprint' %}">
+                                    Impressum
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </footer>
+    {% endblock footer %}
+
+    <script src="{% static 'event/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

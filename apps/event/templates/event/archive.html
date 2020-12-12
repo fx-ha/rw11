@@ -1,0 +1,99 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+<title>RW11 | Archiv</title>
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="d-none">Archiv</h1>
+
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            {% if page_obj %}
+            {% for event in page_obj %}
+            <div class="row mb-1">
+                <div class="col">
+                    {% if event.image_set.exists %}
+                    <a href="{% url 'event:event_detail' event.id %}">
+                        <img src="{{ event.image_set.first.image.url }}" alt="Vorschaubild {{ event.title }}"
+                            title="{{ event.title }}" class="d-block w-100 events-preview-img"
+                            width="1200" height="350">
+                    </a>
+                    {% else %}
+                    <a href="{% url 'event:event_detail' event.id %}">
+                        <img src="{% static 'images/RW11_aufWeiss.jpg' %}" alt="Vorschaubild {{ event.title }}"
+                            title="{{ event.title }}" class="d-block w-100 events-preview-img"
+                            width="1200" height="350">
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'event:event_detail' event.id %}">
+                        <strong>{{ event.title }}</strong>
+                    </a>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col">
+                    {{ event.startdate }}
+                </div>
+            </div>
+            {% endfor %}
+
+            <nav aria-label="Im Archiv blättern">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="Anfang">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Zurück">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ num }}">{{ num }} <span
+                                class="visually-hidden">(aktuell)</span></a>
+                    </li>
+
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Weiter">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Ende">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+
+            {% else %}
+            <p>Es wurden noch keine Veranstaltungen eingetragen.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

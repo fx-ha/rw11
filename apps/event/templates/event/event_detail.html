@@ -1,0 +1,183 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+<title>RW11 | {{ event.title }}</title>
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    {% if event.image_set.all %}
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            <img src="{{ event.image_set.first.image.url }}" alt="Vorschaubild {{ event.title }}"
+                title="{{ event.title }}" class="d-block w-100 event-header-img"
+                width="1200" height="300">
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row mt-2">
+        <div class="col col-lg-9 mx-auto">
+            <h1>{{ event.title }}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            {% if event.short_description %}
+            <p>{{ event.short_description }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            <p>{{ event.description|safe }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            <p>
+                {% if event.enddate %}
+                {{ event.startdate }} - {{ event.enddate }}
+                {% else %}
+                {{ event.startdate }}
+                {% endif %}
+                {% if event.starttime %}
+                {% if event.endtime %}
+                {{ event.starttime }} - {{ event.endtime }}
+                {% else %}
+                {{ event.starttime }}
+                {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    {% if event.image_set.all.count > 1 %}
+    <div class="row">
+        <div class="col col-lg-9 mx-auto">
+            <div id="vorschauCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner event-carousel">
+                    {% for image in event.image_set.all|slice:"1:" %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" alt="Vorschaubild {{ event.title }}" title="{{ event.title }}"
+                            class="d-block w-100">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if is_current_event %}
+    <link rel="stylesheet" href="{% static 'event/css/cookies-eu-banner.default.css' %}">
+
+    <div class="row mt-5">
+        <div class="col col-lg-9 mx-auto">
+
+            <h2 class="h3 mb-3">Reservierung</h2>
+
+            <div class="col-12 col-md-7 mb-3">
+                <div id="cookies-eu-banner" class="mb-3" style="display: none;">
+                    Google-Recaptcha benötigt Cookies.
+                    <a href="{% url 'event:privacy_policy' %}" id="cookies-eu-more">Mehr dazu</a>
+                    <button id="cookies-eu-reject">Ablehnen</button>
+                    <button id="cookies-eu-accept">Zustimmen</button>
+                </div>
+            </div>
+
+            <form action="{% url 'event:contact' %}" method="post" class="row d-none" id="form">
+                {% csrf_token %}
+
+                <input type="hidden" value="{{ event.title }}" name="message_event">
+
+                <div class="col-12 col-md-7 mb-3">
+                    <div class="form-floating">
+                        <select id="persons" class="form-select" name="message_persons">
+                            <option value="">Auswählen...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <label for="persons">Personen</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" name="message_name"
+                            placeholder="Max Musterfrau" required>
+                        <label for="name" class="form-label">Name</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 mb-3">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" name="message_email"
+                            placeholder="name@beispiel.de" required>
+                        <label for="email">E-Mail</label>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 mb-3">
+                    <div class="form-floating">
+                        <textarea class="form-control" id="note" name="message_note"
+                            placeholder="Hinterlasse uns eine Nachricht" required></textarea>
+                        <label for="note">Nachricht</label>
+
+                        {% if event.enddate %}
+                        <div id="noteHelp" class="form-text">Bitte teile uns mit, für welchen Tag reserviert werden
+                            soll.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7 mt-2 mb-3 mb-lg-5">
+                    <button type="submit" class="btn btn-outline-primary g-recaptcha"
+                        data-sitekey="6Ld8FuQZAAAAAK8MB5G7Cg0cpCEjH8Cmf8beOCcb" data-callback='onSubmit'
+                        data-action='submit'>Senden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'event/js/cookies-eu-banner.min.js' %}"></script>
+    <script>
+        new CookiesEuBanner(function () {
+            const head = document.getElementsByTagName('head')[0]
+            const script = document.createElement('script')
+            script.src = 'https://www.google.com/recaptcha/api.js'
+            script.type = 'text/javascript'
+            head.appendChild(script)
+
+            const form = document.getElementById('form')
+            form.classList.remove("d-none")
+        }, true)
+
+        function onSubmit(token) {
+            form = document.getElementById("form")
+            form.reportValidity()
+            if (form.checkValidity()) {
+                form.submit()
+            }
+        }
+    </script>
+    {% endif %}
+
+</div>
+
+{% endblock content %}
