@@ -27,7 +27,7 @@ class TeamMember(models.Model):
         help_text="Ist die Person derzeit aktives Mitglied von RW11?"
     )
 
-    image = models.ImageField('Bild', null=True, blank=True, upload_to='images/team/')
+    image = models.ImageField('Bild', null=True, blank=True, upload_to='media/images/team/')
 
     class Meta:
         verbose_name = 'Teammitglied'

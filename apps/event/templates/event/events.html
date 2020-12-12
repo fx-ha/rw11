@@ -17,7 +17,7 @@
             <div class="row mb-1">
                 <div class="col">
                     {% if event.image_set.exists %}
-                    <a href="{% url 'event:event_detail' event.id %}">
+                    <a href="{% url 'event_detail' event.id %}">
                         <img src="{{ event.image_set.first.image.url }}" alt="Vorschaubild {{ event.title }}"
                             title="{{ event.title }}" class="d-block w-100 events-preview-img"
                             width="1200" height="350">
