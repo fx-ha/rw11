@@ -50,13 +50,13 @@
                 RW11
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNavbar"
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerNavbar"
                 aria-controls="headerNavbar" aria-expanded="false" aria-label="Navigation ein- oder ausblenden">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="headerNavbar">
-                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link text-light {% url 'events' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
                             href="{% url 'events' %}">Spielplan</a>
@@ -103,12 +103,12 @@
         <nav class="bg-dark">
             <div class="container py-3">
                 <div class="row text-light">
-                    <div class="col-6 col-md-auto mr-md-auto pt-1 pt-md-0">
-                        <a class="mr-2" href="mailto:rw11@uni-bayreuth.de" title="Email: rw11@uni-bayreuth.de"
+                    <div class="col-6 col-md-auto me-md-auto pt-1 pt-md-0">
+                        <a class="me-2" href="mailto:rw11@uni-bayreuth.de" title="Email: rw11@uni-bayreuth.de"
                             target="_blank" rel="noopener">
                             <img src="{% static 'images/iconmonstr-email-12.svg' %}" alt="Email: rw11@uni-bayreuth.de">
                         </a>
-                        <a class="mr-2" href="https://facebook.com/RW11Festival" title="RW11 auf Facebook"
+                        <a class="me-2" href="https://facebook.com/RW11Festival" title="RW11 auf Facebook"
                             target="_blank" rel="noopener">
                             <img src="{% static 'images/iconmonstr-facebook-3.svg' %}" alt="RW11 auf Facebook">
                         </a>
@@ -119,13 +119,13 @@
                     </div>
                     <div class="col-6 col-md-auto">
                         <div class="row">
-                            <div class="col-auto ml-auto">
+                            <div class="col-auto ms-auto">
                                 <a class="text-light {% url 'core:privacy_policy' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
                                     href="{% url 'core:privacy_policy' %}">
                                     Datenschutz
                                 </a>
                             </div>
-                            <div class="col-auto ml-auto">
+                            <div class="col-auto ms-auto">
                                 <a class="text-light {% url 'core:imprint' as the_url %} {% if request.path == the_url %}active underline{% endif %}"
                                     href="{% url 'core:imprint' %}">
                                     Impressum

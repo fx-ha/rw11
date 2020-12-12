@@ -1,0 +1,23 @@
+{
+  "name": "rw11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/felix-ha/rw11.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/felix-ha/rw11/issues"
+  },
+  "homepage": "https://gitlab.com/felix-ha/rw11#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.0-beta1"
+  }
+}
