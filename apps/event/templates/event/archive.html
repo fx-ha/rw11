@@ -1,4 +1,4 @@
-{% extends 'base_generic.html' %}
+{% extends 'core/base_generic.html' %}
 
 {% block title %}
 <title>RW11 | Archiv</title>
@@ -17,13 +17,13 @@
             <div class="row mb-1">
                 <div class="col">
                     {% if event.image_set.exists %}
-                    <a href="{% url 'event:event_detail' event.id %}">
+                    <a href="{% url 'event_detail' event.id %}">
                         <img src="{{ event.image_set.first.image.url }}" alt="Vorschaubild {{ event.title }}"
                             title="{{ event.title }}" class="d-block w-100 events-preview-img"
                             width="1200" height="350">
                     </a>
                     {% else %}
-                    <a href="{% url 'event:event_detail' event.id %}">
+                    <a href="{% url 'event_detail' event.id %}">
                         <img src="{% static 'images/RW11_aufWeiss.jpg' %}" alt="Vorschaubild {{ event.title }}"
                             title="{{ event.title }}" class="d-block w-100 events-preview-img"
                             width="1200" height="350">
@@ -34,7 +34,7 @@
 
             <div class="row">
                 <div class="col">
-                    <a href="{% url 'event:event_detail' event.id %}">
+                    <a href="{% url 'event_detail' event.id %}">
                         <strong>{{ event.title }}</strong>
                     </a>
                 </div>

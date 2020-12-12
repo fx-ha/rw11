@@ -10,4 +10,4 @@ def team(request):
         'team_members': team_members,
     }
     
-    return render(request, 'event/team.html', context)
+    return render(request, 'team/team.html', context)

@@ -1,4 +1,4 @@
-{% extends 'base_generic.html' %}
+{% extends 'core/base_generic.html' %}
 
 {% block title %}
 <title>RW11 | {{ event.title }}</title>
@@ -76,7 +76,7 @@
     {% endif %}
 
     {% if is_current_event %}
-    <link rel="stylesheet" href="{% static 'event/css/cookies-eu-banner.default.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/cookies-eu-banner.default.css' %}">
 
     <div class="row mt-5">
         <div class="col col-lg-9 mx-auto">
@@ -86,13 +86,13 @@
             <div class="col-12 col-md-7 mb-3">
                 <div id="cookies-eu-banner" class="mb-3" style="display: none;">
                     Google-Recaptcha benötigt Cookies.
-                    <a href="{% url 'event:privacy_policy' %}" id="cookies-eu-more">Mehr dazu</a>
+                    <a href="{% url 'core:privacy_policy' %}" id="cookies-eu-more">Mehr dazu</a>
                     <button id="cookies-eu-reject">Ablehnen</button>
                     <button id="cookies-eu-accept">Zustimmen</button>
                 </div>
             </div>
 
-            <form action="{% url 'event:contact' %}" method="post" class="row d-none" id="form">
+            <form action="{% url 'core:contact' %}" method="post" class="row d-none" id="form">
                 {% csrf_token %}
 
                 <input type="hidden" value="{{ event.title }}" name="message_event">
@@ -155,7 +155,7 @@
         </div>
     </div>
 
-    <script src="{% static 'event/js/cookies-eu-banner.min.js' %}"></script>
+    <script src="{% static 'core/js/cookies-eu-banner.min.js' %}"></script>
     <script>
         new CookiesEuBanner(function () {
             const head = document.getElementsByTagName('head')[0]

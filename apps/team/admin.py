@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import TeamMember
+
+
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = 'last_name', 'first_name', 'active'
+
+admin.site.register(TeamMember, TeamMemberAdmin)

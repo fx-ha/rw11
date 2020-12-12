@@ -27,16 +27,16 @@
                 {% if events %}
                 {% for event in events %}
                 <p>
-                    <a href="{% url 'event:event_detail' event.id %}">
+                    <a href="{% url 'event_detail' event.id %}">
                         <strong>{{ event.title }}</strong>
                     </a>
                     {{ event.startdate }}
                 </p>
                 {% endfor %}
                 {% if has_current_events %}
-                <a href="{% url 'event:events' %}" class="btn btn-outline-primary">Zum Spielplan</a>
+                <a href="{% url 'events' %}" class="btn btn-outline-primary">Zum Spielplan</a>
                 {% else %}
-                <a href="{% url 'event:archive' %}" class="btn btn-outline-primary">Zum Archiv</a>
+                <a href="{% url 'archive' %}" class="btn btn-outline-primary">Zum Archiv</a>
                 {% endif %}
                 {% endif %}
             </div>
