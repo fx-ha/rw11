@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator
 
-from apps.event.models import Event
+from .models import Event
 
 
 def events(request):
