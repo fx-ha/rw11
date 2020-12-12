@@ -57,8 +57,13 @@ def contact(request):
             message_name = form.cleaned_data['message_name']
             message_email = form.cleaned_data['message_email']
             message_note = form.cleaned_data['message_note']
-            message_event = form.cleaned_data['message_event']
-            message_persons = form.cleaned_data['message_persons']
+
+            if Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now())).exists():
+                message_event = form.cleaned_data['message_event']
+                message_persons = form.cleaned_data['message_persons']
+            else:     
+                message_event = False
+                message_persons = False
 
             """Begin reCAPTCHA validation"""
             recaptcha_response = request.POST.get('g-recaptcha-response')
