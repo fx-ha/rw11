@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv("DEBUG") == 'True')
 
-ALLOWED_HOSTS = ['127.0.0.1', '206.189.53.82', 'rw11.de']
+ALLOWED_HOSTS = ['127.0.0.1', '206.189.53.82', 'rw11.de', 'localhost']
 
 
 # Application definition
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'de-de'
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
