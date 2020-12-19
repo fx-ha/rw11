@@ -8,7 +8,7 @@ from .models import Event
 
 def events(request):
     """View function for event overview"""    
-    events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now()))
+    events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now())).order_by('startdate')
     paginator = Paginator(events, 6)
     
     page_number = request.GET.get('page')
