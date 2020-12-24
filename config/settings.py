@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
+import os, cloudinary, cloudinary.api, cloudinary.uploader
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'ckeditor',
+    'cloudinary',
 
     # my apps
     'apps.core',
@@ -153,3 +154,12 @@ EMAIL_USE_TLS = (os.getenv("EMAIL_USE_TLS") == 'True')
 
 # Google Recaptcha
 GOOGLE_RECAPTCHA_SECRET_KEY = os.getenv("GOOGLE_RECAPTCHA_SECRET_KEY")
+
+
+# Cloudinary
+cloudinary.config(
+    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key = os.getenv('CLOUDINARY_API_KEY'),
+    api_secret = os.getenv('CLOUDINARY_API_SECRET'),
+    secure = True,
+)

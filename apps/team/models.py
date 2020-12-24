@@ -4,6 +4,7 @@ from django.db import models
 from django.urls import reverse
 
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 class TeamMember(models.Model):
     """Model representing a member for the team site"""
@@ -27,7 +28,13 @@ class TeamMember(models.Model):
         help_text="Ist die Person derzeit aktives Mitglied von RW11?"
     )
 
-    image = models.ImageField('Bild', null=True, blank=True, upload_to='media/images/team/')
+    image = CloudinaryField(
+        'Bild', 
+        null=True, 
+        blank=True,
+        transformation=[{'width': 600, 'height': 600, 'crop': "limit"}],
+        format="jpg",
+    )
 
     class Meta:
         verbose_name = 'Teammitglied'

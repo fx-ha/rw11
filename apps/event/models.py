@@ -1,9 +1,8 @@
-import datetime
-
 from django.db import models
 from django.urls import reverse
 
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class Event(models.Model):
@@ -38,7 +37,13 @@ class Event(models.Model):
 
 class Image(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, null=True)
-    image = models.ImageField('Bild', null=True, blank=True, upload_to='media/images/events/')
+    image = CloudinaryField(
+        'Bild', 
+        null=True, 
+        blank=True,
+        transformation=[{'width': 600, 'height': 600, 'crop': "limit"}],
+        format="jpg",
+    )
 
     class Meta:
         verbose_name = 'Bild'
