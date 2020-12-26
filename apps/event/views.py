@@ -22,11 +22,11 @@ def events(request):
 def event(request, event_id):
     """View function for event details"""
     event = get_object_or_404(Event, pk=event_id)
-    if event.startdate > timezone.now().date():
+    if event.startdate >= timezone.now().date():
         is_current_event = True
     else:    
         if event.enddate:
-            if event.enddate > timezone.now().date():
+            if event.enddate >= timezone.now().date():
                 is_current_event = True
             else:    
                 is_current_event = False
