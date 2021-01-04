@@ -21,6 +21,7 @@ from apps.event import views as eventviews
 from apps.team import views as teamviews
 
 urlpatterns = [
+    # admin
     path('admin/', admin.site.urls),
 
     # core
@@ -33,6 +34,9 @@ urlpatterns = [
 
     # team
     path('team/', teamviews.team, name='team'),
+
+    # pwa
+    path('', include('pwa.urls')),
 ]
 
 admin.site.site_header = "RW11"

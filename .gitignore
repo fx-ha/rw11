@@ -5,8 +5,8 @@
 *.pyo
 __pycache__/
 local_settings.py
-media/
-static/
+/media
+/static
 
 # Text backup files
 *.bak
@@ -16,7 +16,7 @@ static/
 *.sqlite3-journal
 
 # Virtual Environment
-env/
+/env
 
 ### Misc ###
 .vscode/

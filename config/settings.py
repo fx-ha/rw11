@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'cloudinary',
+    'pwa',
 
     # my apps
     'apps.core',
@@ -160,3 +161,35 @@ cloudinary.config(
     api_secret = os.getenv('CLOUDINARY_API_SECRET'),
     secure = True,
 )
+
+# PWA
+PWA_APP_DEBUG_MODE = (os.getenv("PWA_APP_DEBUG_MODE") == 'True')
+PWA_APP_NAME = 'RW11'
+PWA_APP_DESCRIPTION = "Die RW11-App haelt Euch ueber die neuesten Veranstaltungen auf dem Laufenden."
+PWA_APP_THEME_COLOR = '#222222'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/app-icon.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/images/apple-icon.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/app-icon.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'de-DE'
