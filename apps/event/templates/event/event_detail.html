@@ -61,7 +61,7 @@
     {% if event.image_set.all.count > 1 %}
     <div class="row">
         <div class="col col-lg-9 mx-auto">
-            <div id="vorschauCarousel" class="carousel slide" data-ride="carousel">
+            <div id="vorschauCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner event-carousel">
                     {% for image in event.image_set.all|slice:"1:" %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
