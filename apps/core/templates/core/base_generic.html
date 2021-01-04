@@ -21,14 +21,19 @@
     <title>RW11</title>
     {% endblock title %}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" />
+    <!-- Preload -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap">
+    <link rel="preload" as="style" href="{% static 'core/css/main.css' %}">
+    <link rel="preload" as="script" href="{% static 'core/js/bootstrap.min.js' %}">
+
+    <!-- Fonts -->    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" media="print"
         onload="this.media='all'" />
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" />
     </noscript>
+
     <!-- Styles -->
     <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
 </head>
@@ -130,7 +135,7 @@
     </footer>
     {% endblock footer %}
 
-    <script src="{% static 'core/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'core/js/bootstrap.min.js' %}" defer></script>
 </body>
 
 </html>
