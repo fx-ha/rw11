@@ -32,7 +32,7 @@ class TeamMember(models.Model):
         'Bild', 
         null=True, 
         blank=True,
-        transformation=[{'width': 600, 'height': 600, 'crop': "limit"}],
+        transformation=[{'width': 700, 'height': 700, 'crop': "limit"}],
         format="jpg",
     )
 
