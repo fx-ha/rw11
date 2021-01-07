@@ -165,6 +165,7 @@ cloudinary.config(
 
 # PWA
 PWA_APP_DEBUG_MODE = (os.getenv("PWA_APP_DEBUG_MODE") == 'True')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/core/js', 'serviceworker.js')
 PWA_APP_NAME = 'RW11'
 PWA_APP_DESCRIPTION = "Die RW11-App haelt Euch ueber die neuesten Veranstaltungen auf dem Laufenden."
 PWA_APP_THEME_COLOR = '#222222'
