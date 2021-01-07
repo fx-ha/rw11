@@ -34,9 +34,6 @@ urlpatterns = [
 
     # team
     path('team/', teamviews.team, name='team'),
-
-    # pwa
-    path('', include('pwa.urls')),
 ]
 
 admin.site.site_header = "RW11"

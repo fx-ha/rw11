@@ -8,6 +8,11 @@ from django.db.models import Q
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError
 
+# pwa
+from django.views.generic.base import TemplateView
+from django.templatetags.static import static
+from django.urls import reverse
+
 from apps.event.models import Event
 from .forms import ContactForm
 
@@ -38,11 +43,6 @@ def imprint(request):
 def privacy_policy(request):
     """View function for privacy policy"""
     return render(request, 'core/privacy_policy.html')
-
-
-def offline(request):
-    """View function for offline"""
-    return render(request, 'core/offline.html')
 
 
 def contact(request):
@@ -149,3 +149,25 @@ def contact(request):
                 'response': 'form_error',
             }
             return render(request, 'core/contact.html', context)
+
+
+# pwa
+def offline(request):
+    """View function for offline"""
+    return render(request, 'core/offline.html')
+
+
+class ServiceWorkerView(TemplateView):
+    template_name = 'core/sw.js'
+    content_type = 'application/javascript'
+    name = 'sw.js'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'version': 2,
+            #'icon_url': static('icons/aurss.512x512.png'),
+            'manifest_url': static('images/icons/manifest.json'),
+            'style_url': static('core/css/main.css'),
+            'home_url': reverse('core:index'),
+            'offline_url': reverse('core:offline'),
+        }

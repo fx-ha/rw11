@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 
 {% load static %}
-{% load pwa %}
 
 <html lang="de">
 
 <head>
     <!-- Meta -->
-    {% progressive_web_app_meta %}
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
@@ -23,19 +20,42 @@
 
     <!-- Preload -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap">
     <link rel="preload" as="style" href="{% static 'core/css/main.css' %}">
     <link rel="preload" as="script" href="{% static 'core/js/bootstrap.min.js' %}">
 
-    <!-- Fonts -->    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" media="print"
-        onload="this.media='all'" />
+    <!-- Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        media="print" onload="this.media='all'" />
     <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" />
     </noscript>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+
+    <!-- PWA -->
+    <link rel="manifest" href="{% static 'images/icons/manifest.json' %}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/icons/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/icons/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/icons/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/icons/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/icons/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/icons/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/icons/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/icons/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/icons/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/icons/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+    <meta name="msapplication-TileColor" content="#f5e9c1">
+    <meta name="theme-color" content="#222222">
+    <meta name="msapplication-TileImage" content="{% static 'images/icons/ms-icon-144x144.png' %}">
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -136,6 +156,19 @@
     {% endblock footer %}
 
     <script src="{% static 'core/js/bootstrap.min.js' %}" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register("sw.js", {
+                scope: '/'
+            }).then(function (reg) {
+                // registration worked
+                console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch(function (error) {
+                // registration failed
+                console.log('Registration failed with ' + error);
+            });
+        }
+    </script>
 </body>
 
 </html>
