@@ -40,6 +40,11 @@ def privacy_policy(request):
     return render(request, 'core/privacy_policy.html')
 
 
+def offline(request):
+    """View function for offline"""
+    return render(request, 'core/offline.html')
+
+
 def contact(request):
     """View function for contact"""    
     events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now()))
