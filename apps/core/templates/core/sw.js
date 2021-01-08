@@ -5,13 +5,13 @@ const staticCachePrefix = 'static';
 const staticCacheName = `${staticCachePrefix}-${VERSION}`;
 const dynamicCacheName = 'dynamic';
 const appShell = [
-    //'{{ icon_url }}',
+    '{{ icon_url }}',
     '{{ manifest_url }}',
     '{{ style_url }}',
     '{{ home_url }}',
     '{{ offline_url }}',
 ].map((partialUrl) => `${location.protocol}//${location.host}${partialUrl}`);
-const maxNumberItemsDynamicCache = 4;
+const maxNumberItemsDynamicCache = 5;
 const urlsToCacheTimes = new Map();
 // In milliseconds.
 const networkWaitTime = 2000;

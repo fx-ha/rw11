@@ -164,8 +164,8 @@ class ServiceWorkerView(TemplateView):
 
     def get_context_data(self, **kwargs):
         return {
-            'version': 2,
-            #'icon_url': static('icons/aurss.512x512.png'),
+            'version': 3,
+            'icon_url': static('images/icons/android-icon-512x512.png'),
             'manifest_url': static('images/icons/manifest.json'),
             'style_url': static('core/css/main.css'),
             'home_url': reverse('core:index'),
