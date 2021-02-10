@@ -115,7 +115,7 @@ def contact(request):
                     body += ': '    
                     body += message_note
 
-                recipients = ['felixhaenel@outlook.com', 'felixha@protonmail.com']
+                recipients = ['rw11@uni-bayreuth.de', 'felixha@protonmail.com']
 
                 # wenn Email-Versand-Fehler
                 try:
