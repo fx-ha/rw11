@@ -25,19 +25,19 @@ def index(request):
         events = events.order_by('startdate')[:4]
         has_current_events = True
     # when no exist return last event
-    else:    
+    else:
         events = Event.objects.filter(startdate__lt=timezone.now()).order_by('-startdate')[:1]
         has_current_events = False
     context = {
         'events': events,
         'has_current_events': has_current_events,
-    }    
+    }
     return render(request, 'core/index.html', context)
 
 
 def imprint(request):
     """View function for imprint"""
-    return render(request, 'core/imprint.html')    
+    return render(request, 'core/imprint.html')
 
 
 def privacy_policy(request):
@@ -46,16 +46,16 @@ def privacy_policy(request):
 
 
 def contact(request):
-    """View function for contact"""    
-    events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now()))
+    """View function for contact"""
+    events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now())).exclude(bookable=False)
 
     if request.method == 'GET':
         context = {
                 'events': events,
         }
-        return render(request, 'core/contact.html', context)        
+        return render(request, 'core/contact.html', context)
 
-    if request.method == 'POST':          
+    if request.method == 'POST':
         form = ContactForm(request.POST)
 
         if form.is_valid():
@@ -66,7 +66,7 @@ def contact(request):
             if Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now())).exists():
                 message_event = form.cleaned_data['message_event']
                 message_persons = form.cleaned_data['message_persons']
-            else:     
+            else:
                 message_event = False
                 message_persons = False
 
@@ -112,7 +112,7 @@ def contact(request):
                     if message_event:
                         body += ' zur Veranstaltung '
                         body += message_event
-                    body += ': '    
+                    body += ': '
                     body += message_note
 
                 recipients = ['rw11@uni-bayreuth.de']

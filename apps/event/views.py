@@ -7,10 +7,10 @@ from .models import Event
 
 
 def events(request):
-    """View function for event overview"""    
+    """View function for event overview"""
     events = Event.objects.filter(Q(startdate__gte=timezone.now()) | Q(enddate__gte=timezone.now())).order_by('startdate')
     paginator = Paginator(events, 6)
-    
+
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
@@ -22,17 +22,21 @@ def events(request):
 def event(request, event_id):
     """View function for event details"""
     event = get_object_or_404(Event, pk=event_id)
+
     if event.startdate >= timezone.now().date():
         is_current_event = True
-    else:    
+    else:
         if event.enddate:
             if event.enddate >= timezone.now().date():
                 is_current_event = True
-            else:    
+            else:
                 is_current_event = False
-        else:        
+        else:
             is_current_event = False
-            
+
+    if event.bookable == False:
+        is_current_event = False
+
     context = {
         'event': event,
         'is_current_event': is_current_event,
@@ -47,10 +51,10 @@ def archive(request):
         Q(enddate__lt=timezone.now()) | Q(enddate__isnull=True)
     )
     paginator = Paginator(events, 6)
-    
+
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
     }
-    return render(request, 'event/archive.html', context)    
+    return render(request, 'event/archive.html', context)

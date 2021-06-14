@@ -21,6 +21,8 @@ class Event(models.Model):
 
     endtime = models.TimeField("Uhrzeit - Ende", null=True, blank=True)
 
+    bookable = models.BooleanField("Reservierbar", default=True)
+
     class Meta:
         verbose_name = 'Veranstaltung'
         verbose_name_plural = 'Veranstaltungen'
@@ -38,8 +40,8 @@ class Event(models.Model):
 class Image(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, null=True)
     image = CloudinaryField(
-        'Bild', 
-        null=True, 
+        'Bild',
+        null=True,
         blank=True,
         transformation=[{'width': 700, 'height': 700, 'crop': "limit"}],
         format="jpg",
