@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv("DEBUG") == 'True')
 
-ALLOWED_HOSTS = ['127.0.0.1', '206.189.53.82', 'rw11.de', 'www.rw11.de', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '206.189.53.82', 'rw11.de', 'www.rw11.de', 'localhost', 'rw-11.herokuapp.com']
 
 
 # Application definition
